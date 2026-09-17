@@ -1,0 +1,44 @@
+{
+    "$schema": "https://getcomposer.org/schema.json",
+    "name": "bartstrik/filament-role-permissions",
+    "description": "Role-based access control for Filament with resource-, field- and action-level permissions.",
+    "keywords": ["laravel", "filament", "permissions", "roles", "rbac"],
+    "license": "MIT",
+    "require": {
+        "php": "^8.4",
+        "filament/filament": "^5.0",
+        "illuminate/contracts": "^12.0|^13.0",
+        "illuminate/support": "^12.0|^13.0"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.24",
+        "orchestra/testbench": "^10.0|^11.0",
+        "phpunit/phpunit": "^11.0|^12.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "BartStrik\\FilamentRolePermissions\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "BartStrik\\FilamentRolePermissions\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "BartStrik\\FilamentRolePermissions\\FilamentRolePermissionsServiceProvider"
+            ]
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "lint": "vendor/bin/pint"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
