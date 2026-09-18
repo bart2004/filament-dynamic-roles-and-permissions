@@ -20,7 +20,7 @@ Each user is assigned a single role. Permissions are edited through a `Roles` re
 composer require bart2004/filament-dynamic-roles-and-permissions
 ```
 
-The package migrations run automatically. Apply them with:
+The package migrations are loaded automatically. Apply them with:
 
 ```bash
 php artisan migrate
@@ -28,7 +28,18 @@ php artisan migrate
 
 They create the `roles`, `resource_permissions`, `field_permissions` and `action_permissions` tables and add a nullable `role_id` column to your `users` table.
 
-Optionally publish the config file:
+### Publishing the migrations (optional)
+
+If you want to customise the schema, publish the migrations into your own `database/migrations` directory:
+
+```bash
+php artisan vendor:publish --tag=filament-dynamic-roles-and-permissions-migrations
+php artisan migrate
+```
+
+Once published, the package stops loading its bundled migrations, so the published copies are the single source of truth (no duplicate runs).
+
+### Publishing the config (optional)
 
 ```bash
 php artisan vendor:publish --tag=filament-dynamic-roles-and-permissions-config
