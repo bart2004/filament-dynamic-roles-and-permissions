@@ -1,8 +1,8 @@
 <?php
 
-namespace BartStrik\FilamentRolePermissions\Tests\Fixtures;
+namespace BartStrik\FilamentDynamicRolesAndPermissions\Tests\Fixtures;
 
-use BartStrik\FilamentRolePermissions\Concerns\HasRolePermissions;
+use BartStrik\FilamentDynamicRolesAndPermissions\Concerns\HasRolePermissions;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable

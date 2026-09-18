@@ -1,8 +1,8 @@
 <?php
 
-namespace BartStrik\FilamentRolePermissions\Concerns;
+namespace BartStrik\FilamentDynamicRolesAndPermissions\Concerns;
 
-use BartStrik\FilamentRolePermissions\Models\Role;
+use BartStrik\FilamentDynamicRolesAndPermissions\Models\Role;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**

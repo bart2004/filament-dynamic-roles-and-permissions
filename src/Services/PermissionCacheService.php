@@ -1,8 +1,8 @@
 <?php
 
-namespace BartStrik\FilamentRolePermissions\Services;
+namespace BartStrik\FilamentDynamicRolesAndPermissions\Services;
 
-use BartStrik\FilamentRolePermissions\Models\Role;
+use BartStrik\FilamentDynamicRolesAndPermissions\Models\Role;
 use Illuminate\Support\Facades\Cache;
 
 class PermissionCacheService

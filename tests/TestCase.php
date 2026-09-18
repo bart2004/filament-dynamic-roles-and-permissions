@@ -1,8 +1,8 @@
 <?php
 
-namespace BartStrik\FilamentRolePermissions\Tests;
+namespace BartStrik\FilamentDynamicRolesAndPermissions\Tests;
 
-use BartStrik\FilamentRolePermissions\FilamentRolePermissionsServiceProvider;
+use BartStrik\FilamentDynamicRolesAndPermissions\FilamentDynamicRolesAndPermissionsServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 abstract class TestCase extends Orchestra
@@ -10,7 +10,7 @@ abstract class TestCase extends Orchestra
     protected function getPackageProviders($app): array
     {
         return [
-            FilamentRolePermissionsServiceProvider::class,
+            FilamentDynamicRolesAndPermissionsServiceProvider::class,
         ];
     }
 

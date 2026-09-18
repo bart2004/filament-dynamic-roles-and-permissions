@@ -1,8 +1,8 @@
 <?php
 
-namespace BartStrik\FilamentRolePermissions\Filament\Resources\Roles\Schemas;
+namespace BartStrik\FilamentDynamicRolesAndPermissions\Filament\Resources\Roles\Schemas;
 
-use BartStrik\FilamentRolePermissions\Support\DynamicPermissions;
+use BartStrik\FilamentDynamicRolesAndPermissions\Support\DynamicPermissions;
 use Filament\Facades\Filament;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Slider;

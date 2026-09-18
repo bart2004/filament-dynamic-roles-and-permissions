@@ -1,14 +1,14 @@
 <?php
 
-namespace BartStrik\FilamentRolePermissions\Filament\Resources\Roles;
+namespace BartStrik\FilamentDynamicRolesAndPermissions\Filament\Resources\Roles;
 
 use BackedEnum;
-use BartStrik\FilamentRolePermissions\Filament\Resources\Roles\Pages\CreateRole;
-use BartStrik\FilamentRolePermissions\Filament\Resources\Roles\Pages\EditRole;
-use BartStrik\FilamentRolePermissions\Filament\Resources\Roles\Pages\ListRoles;
-use BartStrik\FilamentRolePermissions\Filament\Resources\Roles\Schemas\RoleForm;
-use BartStrik\FilamentRolePermissions\Filament\Resources\Roles\Tables\RolesTable;
-use BartStrik\FilamentRolePermissions\Models\Role;
+use BartStrik\FilamentDynamicRolesAndPermissions\Filament\Resources\Roles\Pages\CreateRole;
+use BartStrik\FilamentDynamicRolesAndPermissions\Filament\Resources\Roles\Pages\EditRole;
+use BartStrik\FilamentDynamicRolesAndPermissions\Filament\Resources\Roles\Pages\ListRoles;
+use BartStrik\FilamentDynamicRolesAndPermissions\Filament\Resources\Roles\Schemas\RoleForm;
+use BartStrik\FilamentDynamicRolesAndPermissions\Filament\Resources\Roles\Tables\RolesTable;
+use BartStrik\FilamentDynamicRolesAndPermissions\Models\Role;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -22,12 +22,12 @@ class RoleResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return config('filament-role-permissions.navigation.group');
+        return config('filament-dynamic-roles-and-permissions.navigation.group');
     }
 
     public static function getNavigationSort(): ?int
     {
-        return config('filament-role-permissions.navigation.sort');
+        return config('filament-dynamic-roles-and-permissions.navigation.sort');
     }
 
     public static function form(Schema $schema): Schema

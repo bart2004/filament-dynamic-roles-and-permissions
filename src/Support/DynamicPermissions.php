@@ -1,9 +1,9 @@
 <?php
 
-namespace BartStrik\FilamentRolePermissions\Support;
+namespace BartStrik\FilamentDynamicRolesAndPermissions\Support;
 
-use BartStrik\FilamentRolePermissions\Enums\AccessLevel;
-use BartStrik\FilamentRolePermissions\Services\PermissionCacheService;
+use BartStrik\FilamentDynamicRolesAndPermissions\Enums\AccessLevel;
+use BartStrik\FilamentDynamicRolesAndPermissions\Services\PermissionCacheService;
 use Filament\Forms\Components\Field;
 use Filament\Infolists\Components\Entry;
 use Filament\Resources\Pages\CreateRecord;

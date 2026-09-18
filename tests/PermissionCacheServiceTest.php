@@ -1,12 +1,12 @@
 <?php
 
-namespace BartStrik\FilamentRolePermissions\Tests;
+namespace BartStrik\FilamentDynamicRolesAndPermissions\Tests;
 
-use BartStrik\FilamentRolePermissions\Models\ActionPermission;
-use BartStrik\FilamentRolePermissions\Models\FieldPermission;
-use BartStrik\FilamentRolePermissions\Models\ResourcePermission;
-use BartStrik\FilamentRolePermissions\Models\Role;
-use BartStrik\FilamentRolePermissions\Services\PermissionCacheService;
+use BartStrik\FilamentDynamicRolesAndPermissions\Models\ActionPermission;
+use BartStrik\FilamentDynamicRolesAndPermissions\Models\FieldPermission;
+use BartStrik\FilamentDynamicRolesAndPermissions\Models\ResourcePermission;
+use BartStrik\FilamentDynamicRolesAndPermissions\Models\Role;
+use BartStrik\FilamentDynamicRolesAndPermissions\Services\PermissionCacheService;
 use PHPUnit\Framework\Attributes\Test;
 
 class PermissionCacheServiceTest extends TestCase

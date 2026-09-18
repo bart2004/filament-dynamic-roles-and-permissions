@@ -1,6 +1,6 @@
 <?php
 
-namespace BartStrik\FilamentRolePermissions\Models;
+namespace BartStrik\FilamentDynamicRolesAndPermissions\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;

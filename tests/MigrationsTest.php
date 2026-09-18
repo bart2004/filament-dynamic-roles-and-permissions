@@ -1,6 +1,6 @@
 <?php
 
-namespace BartStrik\FilamentRolePermissions\Tests;
+namespace BartStrik\FilamentDynamicRolesAndPermissions\Tests;
 
 use Illuminate\Support\Facades\Schema;
 use PHPUnit\Framework\Attributes\Test;

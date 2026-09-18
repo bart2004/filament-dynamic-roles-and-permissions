@@ -17,7 +17,7 @@ Each user is assigned a single role. Permissions are edited through a `Roles` re
 ## Installation
 
 ```bash
-composer require bartstrik/filament-role-permissions
+composer require bartstrik/filament-dynamic-roles-and-permissions
 ```
 
 The package migrations run automatically. Apply them with:
@@ -31,7 +31,7 @@ They create the `roles`, `resource_permissions`, `field_permissions` and `action
 Optionally publish the config file:
 
 ```bash
-php artisan vendor:publish --tag=filament-role-permissions-config
+php artisan vendor:publish --tag=filament-dynamic-roles-and-permissions-config
 ```
 
 ## Setup
@@ -41,13 +41,13 @@ php artisan vendor:publish --tag=filament-role-permissions-config
 Add the plugin to your panel provider:
 
 ```php
-use BartStrik\FilamentRolePermissions\FilamentRolePermissionsPlugin;
+use BartStrik\FilamentDynamicRolesAndPermissions\FilamentDynamicRolesAndPermissionsPlugin;
 
 public function panel(Panel $panel): Panel
 {
     return $panel
         // ...
-        ->plugin(FilamentRolePermissionsPlugin::make());
+        ->plugin(FilamentDynamicRolesAndPermissionsPlugin::make());
 }
 ```
 
@@ -56,7 +56,7 @@ This registers the `Roles` resource in the panel.
 ### 2. Add the trait to your User model
 
 ```php
-use BartStrik\FilamentRolePermissions\Concerns\HasRolePermissions;
+use BartStrik\FilamentDynamicRolesAndPermissions\Concerns\HasRolePermissions;
 
 class User extends Authenticatable
 {
@@ -78,7 +78,7 @@ public function isSuperAdmin(): bool
 Field- and action-level permissions are enforced automatically at render time. To enforce **resource-level** permissions, point each model's policy at its Filament resource by extending the base policy:
 
 ```php
-use BartStrik\FilamentRolePermissions\Policies\ResourcePermissionPolicy;
+use BartStrik\FilamentDynamicRolesAndPermissions\Policies\ResourcePermissionPolicy;
 
 class PostPolicy extends ResourcePermissionPolicy
 {
@@ -107,7 +107,7 @@ class PostPolicy extends ResourcePermissionPolicy
 ## Configuration
 
 ```php
-// config/filament-role-permissions.php
+// config/filament-dynamic-roles-and-permissions.php
 return [
     'navigation' => [
         'group' => null, // Navigation group for the Roles resource

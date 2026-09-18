@@ -1,8 +1,8 @@
 <?php
 
-namespace BartStrik\FilamentRolePermissions\Policies;
+namespace BartStrik\FilamentDynamicRolesAndPermissions\Policies;
 
-use BartStrik\FilamentRolePermissions\Services\PermissionCacheService;
+use BartStrik\FilamentDynamicRolesAndPermissions\Services\PermissionCacheService;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 

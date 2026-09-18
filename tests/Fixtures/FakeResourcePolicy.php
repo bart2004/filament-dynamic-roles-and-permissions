@@ -1,8 +1,8 @@
 <?php
 
-namespace BartStrik\FilamentRolePermissions\Tests\Fixtures;
+namespace BartStrik\FilamentDynamicRolesAndPermissions\Tests\Fixtures;
 
-use BartStrik\FilamentRolePermissions\Policies\ResourcePermissionPolicy;
+use BartStrik\FilamentDynamicRolesAndPermissions\Policies\ResourcePermissionPolicy;
 
 class FakeResourcePolicy extends ResourcePermissionPolicy
 {

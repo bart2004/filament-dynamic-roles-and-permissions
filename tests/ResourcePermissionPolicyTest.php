@@ -1,11 +1,11 @@
 <?php
 
-namespace BartStrik\FilamentRolePermissions\Tests;
+namespace BartStrik\FilamentDynamicRolesAndPermissions\Tests;
 
-use BartStrik\FilamentRolePermissions\Models\ResourcePermission;
-use BartStrik\FilamentRolePermissions\Models\Role;
-use BartStrik\FilamentRolePermissions\Tests\Fixtures\FakeResourcePolicy;
-use BartStrik\FilamentRolePermissions\Tests\Fixtures\User;
+use BartStrik\FilamentDynamicRolesAndPermissions\Models\ResourcePermission;
+use BartStrik\FilamentDynamicRolesAndPermissions\Models\Role;
+use BartStrik\FilamentDynamicRolesAndPermissions\Tests\Fixtures\FakeResourcePolicy;
+use BartStrik\FilamentDynamicRolesAndPermissions\Tests\Fixtures\User;
 use PHPUnit\Framework\Attributes\Test;
 
 class ResourcePermissionPolicyTest extends TestCase

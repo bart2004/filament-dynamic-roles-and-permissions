@@ -1,6 +1,6 @@
 <?php
 
-namespace BartStrik\FilamentRolePermissions\Enums;
+namespace BartStrik\FilamentDynamicRolesAndPermissions\Enums;
 
 enum ActionAccess: string
 {

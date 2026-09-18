@@ -1,6 +1,6 @@
 <?php
 
-namespace BartStrik\FilamentRolePermissions\Filament\Resources\Roles\Tables;
+namespace BartStrik\FilamentDynamicRolesAndPermissions\Filament\Resources\Roles\Tables;
 
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;

@@ -1,12 +1,12 @@
 <?php
 
-namespace BartStrik\FilamentRolePermissions;
+namespace BartStrik\FilamentDynamicRolesAndPermissions;
 
-use BartStrik\FilamentRolePermissions\Filament\Resources\Roles\RoleResource;
+use BartStrik\FilamentDynamicRolesAndPermissions\Filament\Resources\Roles\RoleResource;
 use Filament\Contracts\Plugin;
 use Filament\Panel;
 
-class FilamentRolePermissionsPlugin implements Plugin
+class FilamentDynamicRolesAndPermissionsPlugin implements Plugin
 {
     public static function make(): static
     {
@@ -15,7 +15,7 @@ class FilamentRolePermissionsPlugin implements Plugin
 
     public function getId(): string
     {
-        return 'filament-role-permissions';
+        return 'filament-dynamic-roles-and-permissions';
     }
 
     public function register(Panel $panel): void

@@ -1,8 +1,8 @@
 <?php
 
-namespace BartStrik\FilamentRolePermissions\Models;
+namespace BartStrik\FilamentDynamicRolesAndPermissions\Models;
 
-use BartStrik\FilamentRolePermissions\Enums\ActionAccess;
+use BartStrik\FilamentDynamicRolesAndPermissions\Enums\ActionAccess;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 

@@ -1,6 +1,6 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "bartstrik/filament-role-permissions",
+    "name": "bartstrik/filament-dynamic-roles-and-permissions",
     "description": "Role-based access control for Filament with resource-, field- and action-level permissions.",
     "keywords": ["laravel", "filament", "permissions", "roles", "rbac"],
     "license": "MIT",
@@ -17,18 +17,18 @@
     },
     "autoload": {
         "psr-4": {
-            "BartStrik\\FilamentRolePermissions\\": "src/"
+            "BartStrik\\FilamentDynamicRolesAndPermissions\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "BartStrik\\FilamentRolePermissions\\Tests\\": "tests/"
+            "BartStrik\\FilamentDynamicRolesAndPermissions\\Tests\\": "tests/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "BartStrik\\FilamentRolePermissions\\FilamentRolePermissionsServiceProvider"
+                "BartStrik\\FilamentDynamicRolesAndPermissions\\FilamentDynamicRolesAndPermissionsServiceProvider"
             ]
         }
     },

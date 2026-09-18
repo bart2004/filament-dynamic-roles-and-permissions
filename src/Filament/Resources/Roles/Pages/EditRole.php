@@ -1,9 +1,9 @@
 <?php
 
-namespace BartStrik\FilamentRolePermissions\Filament\Resources\Roles\Pages;
+namespace BartStrik\FilamentDynamicRolesAndPermissions\Filament\Resources\Roles\Pages;
 
-use BartStrik\FilamentRolePermissions\Filament\Resources\Roles\RoleResource;
-use BartStrik\FilamentRolePermissions\Filament\Resources\Roles\Traits\SyncsRolePermissions;
+use BartStrik\FilamentDynamicRolesAndPermissions\Filament\Resources\Roles\RoleResource;
+use BartStrik\FilamentDynamicRolesAndPermissions\Filament\Resources\Roles\Traits\SyncsRolePermissions;
 use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
 

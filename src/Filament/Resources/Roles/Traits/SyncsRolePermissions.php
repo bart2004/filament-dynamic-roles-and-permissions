@@ -1,11 +1,11 @@
 <?php
 
-namespace BartStrik\FilamentRolePermissions\Filament\Resources\Roles\Traits;
+namespace BartStrik\FilamentDynamicRolesAndPermissions\Filament\Resources\Roles\Traits;
 
-use BartStrik\FilamentRolePermissions\Models\ActionPermission;
-use BartStrik\FilamentRolePermissions\Models\FieldPermission;
-use BartStrik\FilamentRolePermissions\Models\ResourcePermission;
-use BartStrik\FilamentRolePermissions\Services\PermissionCacheService;
+use BartStrik\FilamentDynamicRolesAndPermissions\Models\ActionPermission;
+use BartStrik\FilamentDynamicRolesAndPermissions\Models\FieldPermission;
+use BartStrik\FilamentDynamicRolesAndPermissions\Models\ResourcePermission;
+use BartStrik\FilamentDynamicRolesAndPermissions\Services\PermissionCacheService;
 use Filament\Facades\Filament;
 
 trait SyncsRolePermissions
