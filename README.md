@@ -84,9 +84,24 @@ public function isSuperAdmin(): bool
 }
 ```
 
-### 3. Enforce resource permissions with a policy
+### 3. Resource permissions are enforced automatically
 
-Field- and action-level permissions are enforced automatically at render time. To enforce **resource-level** permissions, point each model's policy at its Filament resource by extending the base policy:
+That's it — there's nothing to wire up per resource. Field- and action-level
+permissions are enforced at render time, and **resource-level** abilities
+(`viewAny`, `view`, `create`, `update`, `delete`, `restore`, `forceDelete`, plus
+their bulk `*Any` variants) are authorized automatically for every Filament
+resource from the current role's stored permissions.
+
+Under the hood this registers a single `Gate::before` hook that maps each model
+back to its Filament resource, so you no longer write a policy class per model.
+
+#### Overriding a single resource
+
+The automatic check steps aside for any model that already has its own policy
+(registered explicitly, or discovered by Laravel's `App\Policies\{Model}Policy`
+naming convention). So to customise one resource, just write a normal policy —
+optionally extending the base policy to keep the role-based checks for the
+abilities you don't override:
 
 ```php
 use BartStrik\FilamentDynamicRolesAndPermissions\Policies\ResourcePermissionPolicy;
@@ -97,14 +112,24 @@ class PostPolicy extends ResourcePermissionPolicy
     {
         return \App\Filament\Resources\Posts\PostResource::class;
     }
+
+    // Override just the abilities you need; the rest stay role-driven.
+    public function delete($user, $model): bool
+    {
+        return false;
+    }
 }
 ```
+
+To turn the automatic behaviour off entirely and manage every policy yourself,
+set `auto_register_policies` to `false` in the config.
 
 ## How it works
 
 - **`ResourcePermission`**, **`FieldPermission`** and **`ActionPermission`** store the settings per role.
 - **`PermissionCacheService`** caches each role's permissions forever and is cleared whenever a role is saved.
 - **`Support\DynamicPermissions`** hooks into Filament's `Field`, `Column` and `Entry` configuration to apply the cached access levels when a component renders.
+- **`Authorization\ResourcePermissionGate`** registers a `Gate::before` hook that authorizes the standard resource abilities for every Filament resource, deferring to any policy you've written yourself.
 
 ### Access levels
 
@@ -124,6 +149,10 @@ return [
         'group' => null, // Navigation group for the Roles resource
         'sort' => null,  // Navigation sort order
     ],
+
+    // Authorize resource abilities automatically for every Filament resource.
+    // Set to false to write and register every policy yourself.
+    'auto_register_policies' => true,
 ];
 ```
 

@@ -2,6 +2,7 @@
 
 namespace BartStrik\FilamentDynamicRolesAndPermissions;
 
+use BartStrik\FilamentDynamicRolesAndPermissions\Authorization\ResourcePermissionGate;
 use BartStrik\FilamentDynamicRolesAndPermissions\Support\DynamicPermissions;
 use Illuminate\Support\ServiceProvider;
 
@@ -18,6 +19,13 @@ class FilamentDynamicRolesAndPermissionsServiceProvider extends ServiceProvider
     public function boot(): void
     {
         DynamicPermissions::attach();
+
+        // Authorize the standard resource abilities for every Filament resource
+        // automatically, unless the consumer has opted out to manage policies
+        // themselves.
+        if (config('filament-dynamic-roles-and-permissions.auto_register_policies', true)) {
+            ResourcePermissionGate::register();
+        }
 
         // Load the bundled migrations automatically for zero-config installs. If the
         // consumer has published their own copies to customise the schema, skip this
