@@ -17,7 +17,7 @@ Each user is assigned a single role. Permissions are edited through a `Roles` re
 ## Installation
 
 ```bash
-composer require bartstrik/filament-dynamic-roles-and-permissions
+composer require bart2004/filament-dynamic-roles-and-permissions
 ```
 
 The package migrations run automatically. Apply them with:
