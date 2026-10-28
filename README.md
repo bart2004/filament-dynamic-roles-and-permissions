@@ -45,6 +45,26 @@ Once published, the package stops loading its bundled migrations, so the publish
 php artisan vendor:publish --tag=filament-dynamic-roles-and-permissions-config
 ```
 
+### Translations
+
+The Roles resource is translatable, in the same way Filament translates its own texts. The package ships `en` and `nl` and loads them under the `filament-dynamic-roles-and-permissions` namespace, so they follow your application locale (`APP_LOCALE`).
+
+To change a text or add a language, publish the files into your application:
+
+```bash
+php artisan vendor:publish --tag=filament-dynamic-roles-and-permissions-translations
+```
+
+They end up in `lang/vendor/filament-dynamic-roles-and-permissions/{locale}`. You only need to keep the keys you want to change; everything else falls back to the package.
+
+| File           | Contains                                                              |
+|----------------|-----------------------------------------------------------------------|
+| `resource.php` | Name of the resource, used in the navigation and as page titles       |
+| `table.php`    | Column labels of the roles table                                      |
+| `form.php`     | Labels, sections, permission levels, access levels, hints and messages |
+
+The labels of the resources, fields, columns and actions in the permission editor come from your own application, so translate those there.
+
 ## Setup
 
 ### 1. Register the plugin

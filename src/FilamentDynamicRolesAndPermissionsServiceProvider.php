@@ -34,10 +34,16 @@ class FilamentDynamicRolesAndPermissionsServiceProvider extends ServiceProvider
             $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         }
 
+        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'filament-dynamic-roles-and-permissions');
+
         if ($this->app->runningInConsole()) {
             $this->publishes([
                 __DIR__.'/../config/filament-dynamic-roles-and-permissions.php' => config_path('filament-dynamic-roles-and-permissions.php'),
             ], 'filament-dynamic-roles-and-permissions-config');
+
+            $this->publishes([
+                __DIR__.'/../resources/lang' => $this->app->langPath('vendor/filament-dynamic-roles-and-permissions'),
+            ], 'filament-dynamic-roles-and-permissions-translations');
 
             $this->publishesMigrations([
                 __DIR__.'/../database/migrations' => database_path('migrations'),

@@ -20,6 +20,16 @@ class RoleResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
+    public static function getModelLabel(): string
+    {
+        return __('filament-dynamic-roles-and-permissions::resource.label');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('filament-dynamic-roles-and-permissions::resource.plural_label');
+    }
+
     public static function getNavigationGroup(): ?string
     {
         return config('filament-dynamic-roles-and-permissions.navigation.group');

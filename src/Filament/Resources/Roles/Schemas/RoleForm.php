@@ -26,6 +26,8 @@ use Filament\Tables\Columns\Contracts\Editable as EditableColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Str;
 use Livewire\Component as LivewireComponent;
 
 class RoleForm
@@ -33,11 +35,22 @@ class RoleForm
     /** @var array<string, bool> */
     private static array $extracting = [];
 
+    /**
+     * Translates a key from the package's `form` translation file.
+     *
+     * @param  array<string, string>  $replace
+     */
+    protected static function trans(string $key, array $replace = []): string
+    {
+        return __("filament-dynamic-roles-and-permissions::form.{$key}", $replace);
+    }
+
     public static function configure(Schema $schema): Schema
     {
         return $schema
             ->components([
                 TextInput::make('name')
+                    ->label(self::trans('fields.name'))
                     ->required()
                     ->unique(ignoreRecord: true),
 
@@ -57,9 +70,9 @@ class RoleForm
             $resourceName = class_basename($resource);
 
             $schema = [
-                Section::make('Resource Actions')->schema([
+                Section::make(self::trans('sections.resource_actions'))->schema([
                     Slider::make("resource_permissions.{$resourceName}.actions")
-                        ->label('Permission Level')
+                        ->label(self::trans('fields.permission_level'))
                         ->minValue(0)
                         ->maxValue(7)
                         ->step(1)
@@ -67,7 +80,7 @@ class RoleForm
                         ->afterStateHydrated(fn ($component, $state) => $component->state($state ?? 7))
                         ->fillTrack()
                         ->pips(PipsMode::Steps)
-                        ->pipsFormatter(RawJs::make('$value === 0 ? \'None\' : $value === 1 ? \'View Any\' : $value === 2 ? \'View\' : $value === 3 ? \'Create\' : $value === 4 ? \'Update\' : $value === 5 ? \'Delete\' : $value === 6 ? \'Restore\' : $value === 7 ? \'Force Delete\' : String($value)'))
+                        ->pipsFormatter(self::levelsFormatter())
                         ->live(),
                 ]),
             ];
@@ -77,7 +90,9 @@ class RoleForm
                 $schema[] = $pagesTabs;
             }
 
-            $tabs[] = Tabs\Tab::make($resourceName)->schema($schema);
+            $tabs[] = Tabs\Tab::make($resourceName)
+                ->label($resource::getPluralModelLabel())
+                ->schema($schema);
         }
 
         return $tabs;
@@ -125,7 +140,9 @@ class RoleForm
                 continue;
             }
 
-            $tab = Tabs\Tab::make(ucfirst($pageName))->schema($schema);
+            $tab = Tabs\Tab::make($pageName)
+                ->label(self::pageLabel($pageName))
+                ->schema($schema);
 
             $hiddenCallback = self::buildPageTabHiddenCallback($pageName, $resourceName);
             if ($hiddenCallback !== null) {
@@ -148,10 +165,10 @@ class RoleForm
             ->tabs([
                 ...$tabs,
                 Tabs\Tab::make('_placeholder')
-                    ->label('No pages available')
+                    ->label(self::trans('empty_state.tab'))
                     ->schema([
-                        EmptyState::make('No page permissions available')
-                            ->description('Enable at least one resource action above to configure page-level access.'),
+                        EmptyState::make(self::trans('empty_state.heading'))
+                            ->description(self::trans('empty_state.description')),
                     ])
                     ->hidden(fn (Get $get): bool => self::hasAnyAction($get, $resourceName, array_values($allActionKeys))),
             ]);
@@ -228,7 +245,7 @@ class RoleForm
             foreach ($headerActions as $actionName => $actionLabel) {
                 $fields[] = self::buildActionSelect("action_permissions.{$resourceName}.{$pageName}.{$actionName}", $actionLabel);
             }
-            $sections[] = Section::make('Header Actions')->schema($fields)->columns(3);
+            $sections[] = Section::make(self::trans('sections.header_actions'))->schema($fields)->columns(3);
         }
 
         if ($pageName === 'index') {
@@ -239,7 +256,7 @@ class RoleForm
                 foreach ($tableActionGroups['record'] as $actionName => $actionLabel) {
                     $fields[] = self::buildActionSelect("action_permissions.{$resourceName}.{$pageName}.record_{$actionName}", $actionLabel);
                 }
-                $sections[] = Section::make('Row Actions')->schema($fields)->columns(3);
+                $sections[] = Section::make(self::trans('sections.row_actions'))->schema($fields)->columns(3);
             }
 
             if (! empty($tableActionGroups['bulk'])) {
@@ -247,7 +264,7 @@ class RoleForm
                 foreach ($tableActionGroups['bulk'] as $actionName => $actionLabel) {
                     $fields[] = self::buildActionSelect("action_permissions.{$resourceName}.{$pageName}.bulk_{$actionName}", $actionLabel);
                 }
-                $sections[] = Section::make('Bulk Actions')->schema($fields)->columns(3);
+                $sections[] = Section::make(self::trans('sections.bulk_actions'))->schema($fields)->columns(3);
             }
         }
 
@@ -318,9 +335,9 @@ class RoleForm
         return Select::make($statePath)
             ->label($label)
             ->options([
-                'visible' => 'Visible',
-                'disabled' => 'Disabled',
-                'hidden' => 'Hidden',
+                'visible' => self::trans('action_access.visible'),
+                'disabled' => self::trans('action_access.disabled'),
+                'hidden' => self::trans('action_access.hidden'),
             ])
             ->default('visible');
     }
@@ -416,8 +433,15 @@ class RoleForm
             $isRequired = $fieldData['isRequired'] ?? false;
 
             $options = match (true) {
-                $isFormContext, $isEditable => ['mutable' => 'Mutable', 'read_only' => 'Read Only', 'hidden' => 'Hidden'],
-                default => ['read_only' => 'Read Only', 'hidden' => 'Hidden'],
+                $isFormContext, $isEditable => [
+                    'mutable' => self::trans('access.mutable'),
+                    'read_only' => self::trans('access.read_only'),
+                    'hidden' => self::trans('access.hidden'),
+                ],
+                default => [
+                    'read_only' => self::trans('access.read_only'),
+                    'hidden' => self::trans('access.hidden'),
+                ],
             };
 
             $defaultValue = $forcedState ?? (($isFormContext || $isEditable) ? 'mutable' : 'read_only');
@@ -433,7 +457,7 @@ class RoleForm
 
             if ($hasCodeCondition) {
                 $select
-                    ->hint('Be aware: this setting may not have full control due to a code-applied condition.')
+                    ->hint(self::trans('hints.code_condition'))
                     ->hintIcon(Heroicon::OutlinedExclamationTriangle)
                     ->hintColor('warning');
             }
@@ -444,7 +468,7 @@ class RoleForm
                 $select
                     ->live()
                     ->helperText(fn ($state): ?string => in_array($state, ['read_only', 'hidden'], true)
-                        ? 'This field is required. Setting it to Read Only or Hidden stops the user from saving a new record.'
+                        ? self::trans('hints.required_field')
                         : null);
             }
 
@@ -476,10 +500,34 @@ class RoleForm
 
     protected static function contextLabel(string $context): string
     {
-        return match ($context) {
-            'form', 'create', 'edit' => 'Form',
-            default => ucfirst($context),
-        };
+        $key = in_array($context, ['form', 'create', 'edit'], true) ? 'form' : $context;
+
+        return Lang::has("filament-dynamic-roles-and-permissions::form.contexts.{$key}")
+            ? self::trans("contexts.{$key}")
+            : Str::headline($key);
+    }
+
+    /**
+     * Tab name for a resource page; pages without a translation are headlined.
+     */
+    protected static function pageLabel(string $pageName): string
+    {
+        return Lang::has("filament-dynamic-roles-and-permissions::form.pages.{$pageName}")
+            ? self::trans("pages.{$pageName}")
+            : Str::headline($pageName);
+    }
+
+    /**
+     * Labels shown under the permission level slider, from level 0 up to 7.
+     */
+    protected static function levelsFormatter(): RawJs
+    {
+        $labels = array_map(
+            fn (string $key): string => self::trans("levels.{$key}"),
+            ['none', 'view_any', 'view', 'create', 'update', 'delete', 'restore', 'force_delete'],
+        );
+
+        return RawJs::make(json_encode($labels, JSON_UNESCAPED_UNICODE).'[$value] ?? String($value)');
     }
 
     /**

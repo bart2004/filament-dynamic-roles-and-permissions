@@ -15,12 +15,15 @@ class RolesTable
         return $table
             ->columns([
                 TextColumn::make('name')
+                    ->label(__('filament-dynamic-roles-and-permissions::table.columns.name'))
                     ->searchable(),
                 TextColumn::make('created_at')
+                    ->label(__('filament-dynamic-roles-and-permissions::table.columns.created_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
+                    ->label(__('filament-dynamic-roles-and-permissions::table.columns.updated_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
