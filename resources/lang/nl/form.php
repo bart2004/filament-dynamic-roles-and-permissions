@@ -16,13 +16,13 @@ return [
 
     'levels' => [
         'none' => 'Geen',
-        'view_any' => 'Lijst bekijken',
+        'view_any' => 'Lijst',
         'view' => 'Bekijken',
         'create' => 'Aanmaken',
         'update' => 'Bewerken',
         'delete' => 'Verwijderen',
         'restore' => 'Herstellen',
-        'force_delete' => 'Definitief verwijderen',
+        'force_delete' => 'Definitief',
     ],
 
     'pages' => [

@@ -2,6 +2,7 @@
 
 namespace BartStrik\FilamentDynamicRolesAndPermissions\Tests;
 
+use BartStrik\FilamentDynamicRolesAndPermissions\Filament\Resources\Roles\Schemas\RoleForm;
 use BartStrik\FilamentDynamicRolesAndPermissions\FilamentDynamicRolesAndPermissionsServiceProvider;
 use Illuminate\Support\Arr;
 use Illuminate\Support\ServiceProvider;
@@ -75,5 +76,17 @@ class TranslationsTest extends TestCase
 
         $this->assertCount(1, $paths);
         $this->assertStringEndsWith('vendor/'.self::NAMESPACE, array_values($paths)[0]);
+    }
+
+    public function test_the_permission_level_formatter_is_safe_inside_a_double_quoted_attribute(): void
+    {
+        app()->setLocale('nl');
+
+        $javascript = (string) (new \ReflectionMethod(RoleForm::class, 'levelsFormatter'))->invoke(null);
+
+        $this->assertStringNotContainsString('"', $javascript);
+        $this->assertStringStartsWith("['Geen','Lijst'", $javascript);
+        $this->assertStringContainsString("'Definitief']", $javascript);
+        $this->assertStringEndsWith('[$value] ?? String($value)', $javascript);
     }
 }

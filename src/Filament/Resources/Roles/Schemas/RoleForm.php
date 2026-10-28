@@ -527,7 +527,22 @@ class RoleForm
             ['none', 'view_any', 'view', 'create', 'update', 'delete', 'restore', 'force_delete'],
         );
 
-        return RawJs::make(json_encode($labels, JSON_UNESCAPED_UNICODE).'[$value] ?? String($value)');
+        // Filament renders this expression inside a double-quoted HTML attribute, so
+        // the labels are written as single-quoted JavaScript strings.
+        $javascriptLabels = array_map(
+            fn (string $label): string => "'".strtr($label, [
+                '\\' => '\\\\',
+                "'" => "\\'",
+                '"' => '\\u0022',
+                '<' => '\\u003C',
+                '>' => '\\u003E',
+                '&' => '\\u0026',
+                "\n" => ' ',
+            ])."'",
+            $labels,
+        );
+
+        return RawJs::make('['.implode(',', $javascriptLabels).'][$value] ?? String($value)');
     }
 
     /**
